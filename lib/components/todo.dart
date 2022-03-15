@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/controllers/todo_controller.dart';
 
 class ToDoComponent extends StatelessWidget {
+  final int index;
   final String todo;
   final bool flag;
 
   const ToDoComponent({
     Key? key,
+    required this.index,
     required this.todo,
     required this.flag,
   }) : super(key: key);
@@ -26,10 +29,13 @@ class ToDoComponent extends StatelessWidget {
         children: [
           Checkbox(
             checkColor: Colors.white,
-            fillColor: MaterialStateProperty.all(Colors.blue),
-            value: true,
+            fillColor: MaterialStateProperty.all(Colors.red),
+            value: flag,
             shape: const CircleBorder(),
-            onChanged: (bool? value) {},
+            onChanged: (bool? value) {
+              print('???');
+              ToDoController.to.changeToDoFlag(index);
+            },
           ),
           Expanded(
             child: Text(
