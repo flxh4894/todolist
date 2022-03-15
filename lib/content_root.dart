@@ -31,7 +31,16 @@ class _ContentRootState extends State<ContentRoot> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 0,
+        onPressed: () {},
+        child: const Icon(Icons.add, color: Colors.white,),
+        backgroundColor: Colors.red,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 8,
         elevation: 0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

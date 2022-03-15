@@ -33,7 +33,6 @@ class ToDoComponent extends StatelessWidget {
             value: flag,
             shape: const CircleBorder(),
             onChanged: (bool? value) {
-              print('???');
               ToDoController.to.changeToDoFlag(index);
             },
           ),
@@ -41,6 +40,9 @@ class ToDoComponent extends StatelessWidget {
             child: Text(
               todo,
               maxLines: 5,
+              style: TextStyle(
+                decoration: flag ? TextDecoration.lineThrough : null
+              ),
               overflow: TextOverflow.ellipsis,
             ),
           )
