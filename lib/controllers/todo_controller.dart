@@ -26,4 +26,13 @@ class ToDoController extends GetxService {
     todolist[index] = ToDo(todo: todo.todo, flag: !todo.flag);
     todolist.refresh();
   }
+
+
+  /*
+  * ToDoList 추가
+  * */
+  addToDoList(ToDo todo) {
+    // 추가 로직 실행
+    todolist.insert(0, todo);
+  }
 }

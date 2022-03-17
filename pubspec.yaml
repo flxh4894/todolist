@@ -37,6 +37,8 @@ dependencies:
   firebase_core: ^1.13.1
   firebase_database: ^9.0.8
   get: ^4.6.1
+  shared_preferences: ^2.0.13
+  flutter_keyboard_visibility: ^5.2.0
 
 dev_dependencies:
   flutter_test:
