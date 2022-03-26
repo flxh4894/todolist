@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
+import 'package:todolist/models/todo_model.dart';
 import 'package:todolist/pages/todolist.dart';
+
+import 'controllers/todo_controller.dart';
 
 class ContentRoot extends StatefulWidget {
   const ContentRoot({Key? key}) : super(key: key);
@@ -11,6 +14,8 @@ class ContentRoot extends StatefulWidget {
 }
 
 class _ContentRootState extends State<ContentRoot> {
+  final TextEditingController _controller = TextEditingController();
+
   int _index = 0;
   bool _isModalShow = false;
 
@@ -128,6 +133,16 @@ class _ContentRootState extends State<ContentRoot> {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: TextFormField(
           autofocus: true,
+          controller: _controller,
+          onEditingComplete: () {
+            if(_controller.text != ''){
+              ToDoController.to.addToDoList(ToDo(todo: _controller.text, flag: false));
+              _controller.text = '';
+            }
+          },
+          style: const TextStyle(
+            color: Colors.white
+          ),
           decoration: const InputDecoration(
             hintStyle: TextStyle(color: Colors.white),
             hintText: "예) 우주미남도원", border: InputBorder.none),
