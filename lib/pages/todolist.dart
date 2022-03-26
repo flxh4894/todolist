@@ -14,16 +14,17 @@ class ToDoListPage extends StatelessWidget {
         backgroundColor: Colors.red,
       ),
       body: Container(
-        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Obx(
             () => SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   for(ToDo todo in ToDoController.to.todolist)...[
-                    ToDoComponent(todo: todo.todo, flag: todo.flag, index: ToDoController.to.todolist.indexOf(todo),)
+                    ToDoComponent(todo: todo, index: ToDoController.to.todolist.indexOf(todo))
                   ],
                   for(ToDo todo in ToDoController.to.todolistFalse)...[
-                    ToDoComponent(todo: todo.todo, flag: todo.flag, index: ToDoController.to.todolistFalse.indexOf(todo),)
+                    ToDoComponent(todo: todo, index: ToDoController.to.todolistFalse.indexOf(todo))
                   ]
                 ],
               ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
+import 'package:todolist/controllers/todo_controller.dart';
 import 'package:todolist/models/todo_model.dart';
+import 'package:todolist/pages/reorder.dart';
 import 'package:todolist/pages/todolist.dart';
 
-import 'controllers/todo_controller.dart';
 
 class ContentRoot extends StatefulWidget {
   const ContentRoot({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class ContentRoot extends StatefulWidget {
 
 class _ContentRootState extends State<ContentRoot> {
   final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   int _index = 0;
   bool _isModalShow = false;
@@ -58,12 +60,9 @@ class _ContentRootState extends State<ContentRoot> {
   IndexedStack _body() {
     return IndexedStack(
       index: _index,
-      children: [
-        const ToDoListPage(),
-        Container(
-          alignment: Alignment.center,
-          child: const Text('2'),
-        ),
+      children: const [
+        ToDoListPage(),
+        TestPage(),
       ],
     );
   }
@@ -134,15 +133,17 @@ class _ContentRootState extends State<ContentRoot> {
         child: TextFormField(
           autofocus: true,
           controller: _controller,
-          onEditingComplete: () {
-            if(_controller.text != ''){
-              ToDoController.to.addToDoList(ToDo(todo: _controller.text, flag: false));
-              _controller.text = '';
-            }
-          },
+          focusNode: _focusNode,
           style: const TextStyle(
             color: Colors.white
           ),
+          onFieldSubmitted: (String? text) {
+            if(_controller.text != ''){
+              ToDoController.to.addToDoList(ToDo(todo: _controller.text, flag: false));
+            }
+            _controller.clear();
+            _focusNode.requestFocus();
+          },
           decoration: const InputDecoration(
             hintStyle: TextStyle(color: Colors.white),
             hintText: "예) 우주미남도원", border: InputBorder.none),
