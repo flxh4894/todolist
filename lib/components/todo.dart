@@ -32,8 +32,8 @@ class ToDoComponent extends StatelessWidget {
             fillColor: MaterialStateProperty.all(Colors.red),
             value: flag,
             shape: const CircleBorder(),
-            onChanged: (bool? value) {
-              ToDoController.to.changeToDoFlag(index);
+            onChanged: (bool? flag) {
+              ToDoController.to.changeToDoFlag(index, flag!);
             },
           ),
           Expanded(

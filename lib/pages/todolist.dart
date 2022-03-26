@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todolist/components/todo.dart';
 import 'package:todolist/controllers/todo_controller.dart';
+import 'package:todolist/models/todo_model.dart';
 
 class ToDoListPage extends StatelessWidget {
   const ToDoListPage({Key? key}) : super(key: key);
@@ -15,13 +16,18 @@ class ToDoListPage extends StatelessWidget {
       body: Container(
         alignment: Alignment.center,
         child: Obx(
-          () => ListView.builder(
-            itemCount: ToDoController.to.todolist.length,
-            itemBuilder: (context, index) {
-              final todo = ToDoController.to.todolist[index];
-              return ToDoComponent(todo: todo.todo, flag: todo.flag, index: index,);
-            },
-          ),
+            () => SingleChildScrollView(
+              child: Column(
+                children: [
+                  for(ToDo todo in ToDoController.to.todolist)...[
+                    ToDoComponent(todo: todo.todo, flag: todo.flag, index: ToDoController.to.todolist.indexOf(todo),)
+                  ],
+                  for(ToDo todo in ToDoController.to.todolistFalse)...[
+                    ToDoComponent(todo: todo.todo, flag: todo.flag, index: ToDoController.to.todolistFalse.indexOf(todo),)
+                  ]
+                ],
+              ),
+            )
         )
       ),
     );
